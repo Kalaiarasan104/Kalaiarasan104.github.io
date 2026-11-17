@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Kalaiarasan Anandan | Frontend engineer">
+<meta property="og:description" content="React and TypeScript engineer building the Contacts micro-frontend and the AI agent skills my team uses.">
+<meta property="og:type" content="website">
+<title>Kalaiarasan Anandan</title>
+<meta name="description" content="Portfolio of Kalaiarasan Anandan, frontend software engineer (React, TypeScript).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column (max 980px) with a commit-log rail down the left of the work and experience sections */
+:root {
+  --bg: #f6f8f6;
+  --surface: #ffffff;
+  --ink: #14201c;
+  --muted: #56655f;
+  --line: #d9e1dc;
+  --accent: #0b7a62;
+  --accent-soft: #e2f1ec;
+  --warn: #b5532a;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1412; --surface: #151d1a; --ink: #e5ece9; --muted: #9aaaa4;
+    --line: #26332e; --accent: #4cc9a6; --accent-soft: #15302a; --warn: #e3875e;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1412; --surface: #151d1a; --ink: #e5ece9; --muted: #9aaaa4;
+  --line: #26332e; --accent: #4cc9a6; --accent-soft: #15302a; --warn: #e3875e;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+body {
+  background: var(--bg); color: var(--ink);
+  font: 16px/1.6 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 980px; margin: 0 auto; padding-block: 56px 72px; display: grid; gap: 72px; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
+h2 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.01em; }
+h3 { font-size: 1.15rem; font-weight: 700; }
+p { margin: 0; }
+.label { font: 500 0.75rem/1.2 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.mono { font-family: var(--mono); }
+section { display: grid; gap: 28px; min-width: 0; }
+.section-head { display: grid; gap: 6px; }
+
+/* Hero */
+.hero { display: grid; gap: 22px; }
+.prompt { font: 500 0.9rem var(--mono); color: var(--accent); }
+.hero h1 { font-size: clamp(2.6rem, 7vw, 4.6rem); line-height: 1.02; letter-spacing: -0.03em; }
+.hero h1 span { color: var(--muted); font-weight: 500; }
+.lede { font-size: 1.2rem; max-width: 62ch; color: var(--ink); }
+.lede em { font-style: normal; background: var(--accent-soft); padding: 0 4px; border-radius: 3px; }
+.links { display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; font-size: 0.95rem; }
+.links .loc { color: var(--muted); }
+.stats { display: flex; flex-wrap: wrap; gap: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.stat { flex: 1 1 140px; padding: 16px 18px 14px 0; display: grid; gap: 2px; }
+.stat + .stat { padding-left: 18px; border-left: 1px solid var(--line); }
+.stat b { font: 700 1.7rem/1.1 var(--display); font-variant-numeric: tabular-nums; }
+.stat small { color: var(--muted); font-size: 0.85rem; }
+
+.repos { display: grid; gap: 10px; }
+.repos ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; }
+.repos li { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 8px 0; border-bottom: 1px dashed var(--line); }
+.repos li small { color: var(--muted); font-size: 0.82rem; margin-left: 6px; }
+.repos li b { font: 600 0.95rem var(--mono); font-variant-numeric: tabular-nums; }
+@media (max-width: 680px) { .repos ul { grid-template-columns: minmax(0, 1fr); } .repos li small { display: block; margin-left: 0; } }
+
+/* Work */
+.work { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.case { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 22px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.case .tag { font: 500 0.72rem var(--mono); color: var(--accent); letter-spacing: 0.05em; text-transform: uppercase; }
+.case p { color: var(--muted); font-size: 0.97rem; }
+.case .stack { font: 0.78rem var(--mono); color: var(--muted); }
+.case.wide { grid-column: 1 / -1; }
+
+/* Build-time comparison */
+.bench { display: grid; gap: 10px; margin-top: 6px; }
+.bar-row { display: grid; grid-template-columns: 80px minmax(0, 1fr) 64px; gap: 12px; align-items: center; font: 0.85rem var(--mono); }
+.bar { height: 14px; border-radius: 3px; background: var(--line); position: relative; overflow: hidden; }
+.bar i { position: absolute; inset: 0 auto 0 0; border-radius: 3px; background: var(--muted); }
+.bar.fast i { background: var(--accent); }
+.bar-row .v { text-align: right; font-variant-numeric: tabular-nums; }
+.bench-note { font-size: 0.85rem; color: var(--muted); }
+
+/* Commits by year */
+.years { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; align-items: end; height: 150px; margin-top: 8px; }
+.yr { display: grid; gap: 6px; align-content: end; height: 100%; text-align: center; font: 0.8rem var(--mono); }
+.yr .col { background: var(--accent); border-radius: 4px 4px 0 0; opacity: 0.85; }
+.yr .n { font-variant-numeric: tabular-nums; color: var(--ink); }
+.yr .y { color: var(--muted); border-top: 1px solid var(--line); padding-top: 4px; }
+
+/* Engineering pillars */
+.pillars { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+.section-lede { color: var(--muted); max-width: 62ch; margin-top: 4px; }
+.ai-feature { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 26px; display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 28px; align-items: start; }
+.ai-copy { display: grid; gap: 10px; min-width: 0; }
+.ai-copy .tag, .ai-grid .tag { font: 500 0.72rem var(--mono); color: var(--accent); letter-spacing: 0.05em; text-transform: uppercase; }
+.ai-copy p { color: var(--muted); }
+.flow { list-style: none; counter-reset: step; margin: 0; padding: 0; display: grid; gap: 0; min-width: 0; }
+.flow li { counter-increment: step; display: grid; grid-template-columns: 30px minmax(0, 1fr); column-gap: 12px; position: relative; padding-bottom: 14px; }
+.flow li::before { content: counter(step); grid-row: 1 / span 2; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font: 600 0.78rem var(--mono); color: var(--accent); border: 1.5px solid var(--accent); background: var(--surface); position: relative; z-index: 1; }
+.flow li:not(:last-child)::after { content: ""; position: absolute; left: 12.5px; top: 26px; bottom: 0; width: 1.5px; background: var(--line); }
+.flow li:last-child::before { background: var(--accent); color: var(--surface); }
+.flow b { font-size: 0.95rem; }
+.flow span { color: var(--muted); font-size: 0.88rem; }
+.ai-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+@media (max-width: 860px) { .ai-feature { grid-template-columns: minmax(0, 1fr); } .ai-grid { grid-template-columns: minmax(0, 1fr); } }
+.pillar { border-top: 3px solid var(--accent); padding-top: 16px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.pillar .tag { font: 500 0.72rem var(--mono); color: var(--accent); letter-spacing: 0.05em; text-transform: uppercase; }
+.pillar ul { margin: 0; padding-left: 18px; display: grid; gap: 8px; font-size: 0.95rem; }
+.pillar li::marker { color: var(--accent); }
+.pillar .stack { font: 0.78rem var(--mono); color: var(--muted); }
+@media (max-width: 860px) { .pillars { grid-template-columns: minmax(0, 1fr); gap: 32px; } }
+
+/* Experience timeline */
+.log { display: grid; gap: 0; border-left: 2px solid var(--line); margin-left: 6px; }
+.entry { position: relative; padding: 0 0 34px 26px; display: grid; gap: 10px; }
+.entry:last-child { padding-bottom: 0; }
+.entry::before { content: ""; position: absolute; left: -8px; top: 7px; width: 14px; height: 14px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); }
+.entry.now::before { background: var(--accent); }
+.entry .when { font: 500 0.82rem var(--mono); color: var(--muted); }
+.entry ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; color: var(--ink); }
+.entry li::marker { color: var(--accent); }
+
+/* Skills */
+.skills { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 14px 24px; }
+.skills dt { font: 500 0.8rem var(--mono); color: var(--muted); padding-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+.skills dd { margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font-size: 0.88rem; padding: 3px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); }
+
+/* Credentials */
+.creds { display: grid; gap: 0; }
+.cred { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 20px; padding: 16px 0; border-top: 1px solid var(--line); }
+.cred:last-child { border-bottom: 1px solid var(--line); }
+.cred .meta { color: var(--muted); font-size: 0.93rem; grid-column: 1; }
+.cred .date { font: 0.82rem var(--mono); color: var(--muted); grid-row: 1; grid-column: 2; white-space: nowrap; padding-top: 3px; }
+
+/* Contact */
+.contact { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 28px; display: grid; gap: 18px; }
+.contact-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.addr { font: 500 1rem var(--mono); user-select: all; word-break: break-all; }
+button.copy { font: 500 0.85rem var(--body); color: var(--ink); background: var(--accent-soft); border: 1px solid var(--line); border-radius: 6px; padding: 6px 12px; cursor: pointer; }
+button.copy:hover { border-color: var(--accent); }
+footer { color: var(--muted); font-size: 0.85rem; }
+
+@media (max-width: 680px) {
+  .wrap { gap: 56px; padding-block: 36px 56px; }
+  .work { grid-template-columns: minmax(0, 1fr); }
+  .skills { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .skills dd { margin-bottom: 12px; }
+  .stat + .stat { border-left: 0; padding-left: 0; }
+  .stat { flex-basis: 45%; }
+  .cred { grid-template-columns: minmax(0, 1fr); }
+  .cred .date { grid-row: auto; grid-column: 1; padding-top: 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .bar i { transition: width 0.9s ease-out; }
+}
+</style>
+</head>
+<body>
+
+<main class="wrap">
+  <header class="hero">
+    <p class="prompt">$ git log --author="kalaiarasan" --since=2023</p>
+    <h1>Kalaiarasan Anandan<br><span>Frontend engineer.</span></h1>
+    <p class="lede">I build and maintain the <em>Contacts micro-frontend</em> at Full Creative, a React and TypeScript app that runs inside Setmore on the web, in the Electron desktop app and across answering-service brands. I also build the <em>AI agent skills</em> my team uses to triage production errors, analyse bugs and ship pull requests.</p>
+    <nav class="links" aria-label="Profiles">
+      <a href="https://www.linkedin.com/in/kalaiarasan-a-b79a661b3/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/Kalaiarasan104" target="_blank" rel="noopener">GitHub</a>
+      <a href="#contact">Email</a>
+      <span class="mono">+91 82202 42882</span>
+      <span class="loc">Tirupattur, Tamil Nadu, India</span>
+    </nav>
+    <div class="stats">
+      <div class="stat"><b>3.5 yrs</b><small>in production engineering</small></div>
+      <div class="stat"><b>2,700+</b><small>commits on GitHub</small></div>
+      <div class="stat"><b>290</b><small>merged PRs across 4 repos</small></div>
+      <div class="stat"><b>200+</b><small>Jira tickets delivered</small></div>
+    </div>
+    <div class="repos" aria-label="Merged pull requests by repository">
+      <span class="label">Merged PRs by repository</span>
+      <ul>
+        <li><span>Contacts component <small>React micro-frontend</small></span><b>256</b></li>
+        <li><span>Contacts SDK <small>shared data and search layer</small></span><b>18</b></li>
+        <li><span>Business utilities <small>published npm package</small></span><b>11</b></li>
+        <li><span>Frontend monorepo <small>shared UI platform</small></span><b>5</b></li>
+      </ul>
+    </div>
+  </header>
+
+  <section aria-labelledby="ai-h">
+    <div class="section-head">
+      <span class="label">AI-assisted engineering</span>
+      <h2 id="ai-h">Agent workflows my team runs every day</h2>
+      <p class="section-lede">Our repo keeps a shared library of 13 agent skills for Claude Code and Cursor. I wrote the Sentry triage and Jira bug analyser skills, and I've committed to 7 of the 13.</p>
+    </div>
+
+    <article class="ai-feature">
+      <div class="ai-copy">
+        <span class="tag">Built from scratch</span>
+        <h3>Sentry triage agent</h3>
+        <p>Give it a Sentry issue link and it decides whether the error is ours, whether it's real or noise, and whether it's already known. Only then does it write a triage plan with a root cause and a proposed fix. A person approves each next step.</p>
+      </div>
+      <ol class="flow" aria-label="How the Sentry triage agent works">
+        <li><b>Ownership check</b><span>Is the error in our code or the SDK boundary?</span></li>
+        <li><b>Noise filter</b><span>Drop network blips and known browser noise.</span></li>
+        <li><b>Duplicate search</b><span>Match similar issues from the last 45 days.</span></li>
+        <li><b>Evidence</b><span>Version, environment, browser and stack trace.</span></li>
+        <li><b>Triage plan</b><span>Root cause and proposed fix, written to a file.</span></li>
+        <li><b>Human decision</b><span>Fix it in the repo, file a Jira bug, or both.</span></li>
+      </ol>
+    </article>
+
+    <div class="ai-grid">
+      <article class="case">
+        <span class="tag">Built from scratch</span>
+        <h3>Jira bug analyser</h3>
+        <p>Reads a bug ticket with its screen recordings, Sentry links and custom fields, then reports the likely root cause. It stays read-only until a developer confirms the plan.</p>
+        <span class="stack">Jira · Sentry · Jam recordings</span>
+      </article>
+      <article class="case">
+        <span class="tag">Maintained</span>
+        <h3>Team skill library</h3>
+        <p>Updated the rules in the skills for Jira tickets, PR self-review, PR comment fixes, PR creation and alpha deploys, plus the shared branch and PR conventions they all follow.</p>
+        <span class="stack">7 of 13 skills · shared conventions</span>
+      </article>
+      <article class="case">
+        <span class="tag">Daily practice</span>
+        <h3>AI in everyday work</h3>
+        <p>I use Claude Code and Cursor connected to Jira, Confluence, Sentry, GitHub and Figma for root-cause analysis, test writing, refactors and design docs. Every change still goes through tests and review.</p>
+        <span class="stack">Claude Code · Cursor · MCP connectors</span>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="work-h">
+    <div class="section-head">
+      <span class="label">Selected work</span>
+      <h2 id="work-h">Things I shipped and fixed</h2>
+    </div>
+    <div class="work">
+      <article class="case wide">
+        <span class="tag">Build performance</span>
+        <h3>Production builds 3.5x faster</h3>
+        <p>I benchmarked Webpack against Rspack on the Contacts codebase, measuring build time, bundle size and Gzip/Brotli output, and recommended the switch. Each build saves about 21 seconds for every developer and every CI run.</p>
+        <div class="bench" role="img" aria-label="Production build time: Webpack 29.5 seconds, Rspack 8.45 seconds">
+          <div class="bar-row"><span>Webpack</span><div class="bar"><i style="width:100%"></i></div><span class="v">29.5 s</span></div>
+          <div class="bar-row"><span>Rspack</span><div class="bar fast"><i style="width:28.6%"></i></div><span class="v">8.45 s</span></div>
+        </div>
+        <p class="bench-note">Brotli bundle: 880 KiB with Webpack, 862 KiB with Rspack.</p>
+      </article>
+
+      <article class="case">
+        <span class="tag">Feature</span>
+        <h3>Block Contacts</h3>
+        <p>Built blocking for answering-service brands end to end: block and unblock APIs, warnings for contacts that can't be blocked, blocked badges in the list and search, and CSV import and export. It ships behind a feature flag.</p>
+        <span class="stack">React · TypeScript · Redux · REST</span>
+      </article>
+
+      <article class="case">
+        <span class="tag">Healthcare</span>
+        <h3>Merge Contacts for HIPAA accounts</h3>
+        <p>Extended contact merging to FHIR-backed accounts, so linked custom fields and patient login details stay intact through merges and edits.</p>
+        <span class="stack">FHIR · data integrity</span>
+      </article>
+
+      <article class="case">
+        <span class="tag">Design system</span>
+        <h3>EDS adoption across profiles</h3>
+        <p>Moved Staff, Customer and Business profiles onto the in-house EDS components: working hours and breaks, timezone, contact fields, social links and an avatar crop tool.</p>
+        <span class="stack">EDS · Tailwind CSS · Figma</span>
+      </article>
+
+      <article class="case">
+        <span class="tag">Maintainability</span>
+        <h3>Deep clean of the codebase</h3>
+        <p>Removed about 25,800 net lines of dead code (14.6% of the source), 37 unused files and around 620 exports. The main bundle got 6.5% smaller.</p>
+        <span class="stack">Webpack · static analysis</span>
+      </article>
+
+      <article class="case">
+        <span class="tag">Reliability</span>
+        <h3>Memory leaks in the desktop app</h3>
+        <p>Traced leaks in the Electron app to listeners, React roots and event subscriptions that were never cleaned up. I documented the fixes so the team handles component lifecycles the same way.</p>
+        <span class="stack">Electron · Chrome DevTools</span>
+      </article>
+
+      <article class="case">
+        <span class="tag">Production errors</span>
+        <h3>50+ Sentry issues fixed</h3>
+        <p>Fixed more than 50 production errors reported by Sentry, from null-safety crashes to failed fetches and aborted requests, and added unit tests so they stay fixed.</p>
+        <span class="stack">Sentry · Jest · TypeScript</span>
+      </article>
+
+      <article class="case wide">
+        <span class="tag">Activity</span>
+        <h3>Commits by year</h3>
+        <div class="years" role="img" aria-label="Commits per year: 2023, 160; 2024, 944; 2025, 667; 2026, 555 so far">
+          <div class="yr"><div class="col" style="height:17%"></div><span class="n">160</span><span class="y">2023</span></div>
+          <div class="yr"><div class="col" style="height:100%"></div><span class="n">944</span><span class="y">2024</span></div>
+          <div class="yr"><div class="col" style="height:71%"></div><span class="n">667</span><span class="y">2025</span></div>
+          <div class="yr"><div class="col" style="height:59%"></div><span class="n">555</span><span class="y">2026*</span></div>
+        </div>
+        <p class="bench-note">Non-merge commits to the Contacts repository. 2023 starts in August; *2026 is up to November.</p>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="eng-h">
+    <div class="section-head">
+      <span class="label">Beyond features</span>
+      <h2 id="eng-h">Security and code quality</h2>
+    </div>
+    <div class="pillars">
+      <article class="pillar">
+        <span class="tag">Security</span>
+        <h3>Security fixes from day one</h3>
+        <ul>
+          <li>Fixed a stored XSS in customer notes and an IDOR that exposed company information.</li>
+          <li>Patched a prototype-pollution vulnerability flagged by Dependabot.</li>
+          <li>Added input sanitisation for HTML entities and invisible Unicode in names, addresses and search.</li>
+          <li>Added a same-origin check to navigation guards so external links can't be abused.</li>
+          <li>Completed the AWSE web-security course (web application penetration testing).</li>
+        </ul>
+      </article>
+      <article class="pillar">
+        <span class="tag">Code quality</span>
+        <h3>Guardrails in the repo</h3>
+        <ul>
+          <li>Added lint checks with ESLint and lint-staged, so issues are caught on every commit.</li>
+          <li>Updated the ESLint configuration for TypeScript and React.</li>
+          <li>Migrated shared helpers from JavaScript to typed TypeScript.</li>
+          <li>Cleared ESLint warnings across features and kept SonarQube quality gates green.</li>
+        </ul>
+        <span class="stack">ESLint · lint-staged · Prettier · SonarQube</span>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="exp-h">
+    <div class="section-head">
+      <span class="label">Experience</span>
+      <h2 id="exp-h">Full Creative, Chennai</h2>
+    </div>
+    <div class="log">
+      <div class="entry now">
+        <span class="when">Jul 2023 – Present</span>
+        <h3>Software Engineer, Contacts team</h3>
+        <ul>
+          <li>Own the Contacts micro-frontend used across Setmore web, desktop and answering-service brands.</li>
+          <li>Shipped Custom Hours Availability with 24-hour time, slot validation and an unsaved-changes guard.</li>
+          <li>Added role-based access for private contact methods, exports and staff actions.</li>
+          <li>Localised the UI into French, Spanish and Portuguese and added Google Analytics tracking.</li>
+          <li>Wrote design docs for a CDN migration, Elasticsearch staff search and Google Contacts import.</li>
+          <li>Use Java and REST API experience when wiring frontend features to backend services.</li>
+          <li>Cover features with Jest unit tests and Playwright component tests.</li>
+        </ul>
+      </div>
+      <div class="entry">
+        <span class="when">Apr 2023 – Jun 2023</span>
+        <h3>Software Engineering Intern</h3>
+        <ul>
+          <li>Built REST APIs in Java and connected them to the frontend, applying core and Advanced Java concepts.</li>
+          <li>Fixed UI bugs in contact profile and notes flows, wrote unit tests and patched production errors.</li>
+          <li>Started on security tickets early, including XSS and IDOR fixes. Converted to a full-time role.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="skills-h">
+    <div class="section-head">
+      <span class="label">Toolkit</span>
+      <h2 id="skills-h">Skills</h2>
+    </div>
+    <dl class="skills">
+      <dt>Languages</dt>
+      <dd><span class="chip">TypeScript</span><span class="chip">JavaScript (ES6+)</span><span class="chip">Java</span><span class="chip">SQL</span><span class="chip">Python (basic)</span></dd>
+      <dt>Backend</dt>
+      <dd><span class="chip">Core Java</span><span class="chip">Advanced Java</span><span class="chip">REST APIs</span><span class="chip">SQL</span></dd>
+      <dt>Frontend</dt>
+      <dd><span class="chip">React 18</span><span class="chip">Redux</span><span class="chip">Tailwind CSS</span><span class="chip">HTML &amp; CSS</span><span class="chip">Micro-frontends</span><span class="chip">Design systems</span><span class="chip">i18n</span></dd>
+      <dt>Testing</dt>
+      <dd><span class="chip">Jest</span><span class="chip">Playwright</span><span class="chip">Selenium</span><span class="chip">Manual testing</span><span class="chip">SonarQube</span><span class="chip">Sentry</span></dd>
+      <dt>Tools</dt>
+      <dd><span class="chip">Webpack</span><span class="chip">Rspack</span><span class="chip">pnpm</span><span class="chip">Git</span><span class="chip">Electron</span><span class="chip">IndexedDB</span><span class="chip">Jira</span><span class="chip">Figma</span></dd>
+      <dt>AI engineering</dt>
+      <dd><span class="chip">Claude Code</span><span class="chip">Cursor</span><span class="chip">Agent skills</span><span class="chip">MCP connectors</span><span class="chip">Prompt design</span><span class="chip">Human-in-the-loop workflows</span></dd>
+      <dt>Practices</dt>
+      <dd><span class="chip">Agile / Scrum</span><span class="chip">Performance profiling</span><span class="chip">Memory-leak debugging</span><span class="chip">Web security</span></dd>
+    </dl>
+  </section>
+
+  <section aria-labelledby="cred-h">
+    <div class="section-head">
+      <span class="label">Learning</span>
+      <h2 id="cred-h">Certifications and education</h2>
+    </div>
+    <div class="creds">
+      <div class="cred"><h3>Versant English Test, Pearson</h3><span class="date">Jun 2025</span><span class="meta">CEFR C1 (Proficient), GSE 81. Writing 80/80.</span></div>
+      <div class="cred"><h3>Advanced Web Security Expert (AWSE) v2</h3><span class="date">Nov 2023 – Feb 2024</span><span class="meta">The Hacktivists. Web application penetration testing.</span></div>
+      <div class="cred"><h3>Software Testing &amp; Development, QSpiders</h3><span class="date">Sep 2022 – Mar 2023</span><span class="meta">Core and Advanced Java, SQL, Selenium WebDriver and manual testing.</span></div>
+      <div class="cred"><h3>Bachelor of Engineering</h3><span class="date">2017 – 2021</span><span class="meta">Velammal Institute of Technology. CGPA 7.91.</span></div>
+    </div>
+  </section>
+
+  <section id="contact" aria-labelledby="contact-h">
+    <div class="contact">
+      <span class="label">Contact</span>
+      <h2 id="contact-h">Let's talk</h2>
+      <p>I'm open to frontend and full-stack roles. Email or call me.</p>
+      <div class="contact-row">
+        <span class="addr" id="email">kalaianand104@gmail.com</span>
+        <button class="copy" data-target="email" data-label="Copy email" type="button">Copy email</button>
+      </div>
+      <div class="contact-row">
+        <span class="addr" id="phone">+91 82202 42882</span>
+        <button class="copy" data-target="phone" data-label="Copy phone" type="button">Copy phone</button>
+      </div>
+      <div class="links">
+        <a href="https://www.linkedin.com/in/kalaiarasan-a-b79a661b3/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/Kalaiarasan104" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>© 2026 Kalaiarasan Anandan</footer>
+</main>
+
+<script>
+(function () {
+  document.querySelectorAll('button.copy').forEach(function (btn) {
+    var addr = document.getElementById(btn.dataset.target);
+    btn.addEventListener('click', function () {
+      var text = addr.textContent.trim();
+      function selectFallback() {
+        var r = document.createRange(); r.selectNodeContents(addr);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        btn.textContent = 'Selected, press Ctrl+C';
+      }
+      try {
+        navigator.clipboard.writeText(text).then(function () {
+          btn.textContent = 'Copied';
+          setTimeout(function () { btn.textContent = btn.dataset.label; }, 1800);
+        }, selectFallback);
+      } catch (e) { selectFallback(); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
